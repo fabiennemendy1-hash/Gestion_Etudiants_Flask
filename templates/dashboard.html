@@ -6,28 +6,24 @@
 <div class="container-fluid py-4">
     <div class="row mb-5 align-items-center">
         <div class="col-md-8">
-            <h1 class="fw-bold text-dark mb-1" style="letter-spacing: -1px;">Tableau de Bord Académique</h1>
-            <p class="text-muted">Gestion des 60 crédits et des performances par département.</p>
+            <h1 class="fw-bold text-dark mb-1">Tableau de Bord Académique</h1>
+            <p class="text-muted">Gestion des 60 crédits - ESTM Dakar</p>
         </div>
         <div class="col-md-4 text-md-end">
-            <a href="/ajouter" class="btn btn-primary px-4 py-2 fw-bold shadow-sm" style="background: #004a99; border: none;">
+            <a href="/ajouter" class="btn btn-primary px-4 fw-bold shadow-sm" style="background: #004a99; border: none;">
                 + INSCRIRE UN ÉTUDIANT
             </a>
         </div>
     </div>
 
     <div class="card border-0 shadow-sm" style="border-radius: 15px; overflow: hidden;">
-        <div class="card-header bg-white py-3 border-bottom-0">
-            <h5 class="mb-0 fw-bold" style="color: #334155;">Registre Global 2025-2026</h5>
-        </div>
-        
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
                 <thead style="background: #f8fafc;">
                     <tr>
                         <th class="ps-4 py-3 text-muted small fw-bold">MATRICULE</th>
                         <th class="py-3 text-muted small fw-bold">ÉTUDIANT</th>
-                        <th class="py-3 text-muted small fw-bold">DÉPARTEMENT / FILIÈRE</th>
+                        <th class="py-3 text-muted small fw-bold">DÉPARTEMENT</th>
                         <th class="py-3 text-center text-muted small fw-bold">MOYENNE</th>
                         <th class="py-3 text-center text-muted small fw-bold">DÉCISION</th>
                         <th class="py-3 text-end pe-4 text-muted small fw-bold">ACTION</th>
@@ -37,15 +33,43 @@
                     {% for e in etudiants %}
                     <tr>
                         <td class="ps-4">
-                            <span class="badge bg-light text-dark border fw-medium px-2 py-1">{{ e.matricule }}</span>
+                            <span class="badge bg-light text-dark border px-2 py-1">{{ e.matricule }}</span>
                         </td>
-                        <td>
-                            <div class="fw-bold text-dark">{{ e.prenom }} {{ e.nom }}</div>
-                        </td>
+                        <td class="fw-bold">{{ e.prenom }} {{ e.nom }}</td>
                         <td>
                             {% if "Multimédia" in e.filiere %}
-                                <span class="badge bg-info-subtle text-info border border-info-subtle px-3 py-2">🎨 {{ e.filiere }}</span>
+                                <span class="badge bg-info-subtle text-info border border-info-subtle px-3 py-2">🎨 CIM</span>
                             {% elif "Réseaux" in e.filiere %}
-                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">🌐 {{ e.filiere }}</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">🌐 R&T</span>
                             {% elif "Droit" in e.filiere %}
-                                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle
+                                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-3 py-2">⚖️ DROIT</span>
+                            {% else %}
+                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">💰 COMPTA</span>
+                            {% endif %}
+                            </td>
+                        <td class="text-center fw-bold {{ 'text-success' if e.note >= 10 else 'text-danger' }}">
+                            {{ e.note }} / 20
+                        </td>
+                        <td class="text-center">
+                            {% if e.note >= 10 %}
+                                <span class="badge bg-success">ADMIS</span>
+                            {% else %}
+                                <span class="badge bg-danger">AJOURNÉ</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end pe-4">
+                            <a href="/bulletin/{{ loop.index0 }}" class="btn btn-sm btn-dark px-3">RELEVÉ</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .table-hover tbody tr:hover { background-color: #f1f5f9; transition: 0.3s; }
+    .badge { font-weight: 600; }
+</style>
+{% endblock %}
