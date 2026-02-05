@@ -2,21 +2,22 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# Base de données temporaire pour la démo
-etudiants = []
+# Base de données fictive pour la démonstration
+etudiants = [
+    {'matricule': 'ESTM-001', 'prenom': 'Sokhna', 'nom': 'DIOP', 'note': 15.5},
+    {'matricule': 'ESTM-002', 'prenom': 'Fabienne', 'nom': 'MENDY', 'note': 12.0}
+]
 
 @app.route('/')
-def index():
+def home():
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = request.form.get('username')
-        pwd = request.form.get('password')
-        if user == 'admin' and pwd == 'estm2026':
+        # Identifiants simples pour la démo
+        if request.form['username'] == 'admin' and request.form['password'] == 'estm2026':
             return redirect(url_for('dashboard'))
-        return "Erreur : Identifiants incorrects !"
     return render_template('login.html')
 
 @app.route('/dashboard')
@@ -26,13 +27,13 @@ def dashboard():
 @app.route('/ajouter', methods=['GET', 'POST'])
 def ajouter():
     if request.method == 'POST':
-        etudiant = {
-            'prenom': request.form.get('prenom'),
-            'nom': request.form.get('nom'),
-            'matricule': request.form.get('matricule'),
-            'note': float(request.form.get('note') or 0)
+        nouvel_eleve = {
+            'matricule': request.form['matricule'],
+            'prenom': request.form['prenom'],
+            'nom': request.form['nom'],
+            'note': float(request.form['note'])
         }
-        etudiants.append(etudiant)
+        etudiants.append(nouvel_eleve)
         return redirect(url_for('dashboard'))
     return render_template('ajouter.html')
 
