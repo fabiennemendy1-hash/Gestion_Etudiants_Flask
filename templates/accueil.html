@@ -3,72 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenue | ESTM CONNECT</title>
+    <title>ESTM CONNECT | Excellence Technologique</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        body, html { height: 100%; margin: 0; font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         
-        /* Hero Section avec image d'excellence */
+        /* Section Hero */
         .hero {
-            background: linear-gradient(rgba(0, 74, 153, 0.7), rgba(15, 23, 42, 0.9)), 
-                        url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070');
+            background: linear-gradient(rgba(0, 74, 153, 0.8), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070');
             background-size: cover;
             background-position: center;
-            height: 100vh;
+            height: 90vh;
             display: flex;
             align-items: center;
             color: white;
-            text-align: center;
         }
-
-        .hero-content { max-width: 800px; margin: auto; padding: 20px; }
-        
-        .school-badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        h1 { font-size: 4rem; font-weight: 800; margin-bottom: 20px; }
-        .lead { font-size: 1.5rem; margin-bottom: 40px; opacity: 0.9; }
 
         .btn-portal {
             background: #ffffff;
             color: #004a99;
-            padding: 15px 40px;
+            padding: 12px 35px;
             font-weight: 700;
-            border-radius: 5px;
+            border-radius: 4px;
             text-decoration: none;
             transition: 0.3s;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .btn-portal:hover {
-            background: #004a99;
+        .btn-portal:hover { background: #e2e8f0; color: #003366; }
+
+        /* Section Formations */
+        .section-title {
+            color: #004a99;
+            font-weight: 800;
+            margin-bottom: 50px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .card-formation {
+            border: none;
+            border-bottom: 4px solid #004a99;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .card-formation:hover { transform: translateY(-10px); }
+
+        .icon-box {
+            font-size: 2.5rem;
+            color: #004a99;
+            margin-bottom: 20px;
+        }
+
+        /* Footer / Contact */
+        .footer {
+            background: #0f172a;
             color: white;
-            transform: translateY(-3px);
+            padding: 60px 0;
         }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="hero-content">
-            <div class="school-badge text-white">Éducation • Innovation • Excellence</div>
-            <h1>ESTM CONNECT</h1>
-            <p class="lead">Le portail numérique nouvelle génération pour la gestion des parcours académiques et professionnels.</p>
-            
-            <div class="mt-5">
-                <a href="/login" class="btn-portal">ACCÉDER À L'ESPACE SCOLARITÉ</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#">ESTM<span class="text-info">.</span></a>
+            <div class="ms-auto">
+                <a href="/login" class="btn btn-outline-light px-4 fw-bold">PORTAIL PRIVÉ</a>
             </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container text-center">
+            <h1 class="display-2 fw-extrabold mb-4">L'école du <span class="text-info">Futur</span></h1>
+            <p class="lead mb-5 fs-4">Formez-vous aux métiers du numérique et du management avec l'ESTM.</p>
+            <a href="#formations" class="btn btn-portal">DÉCOUVRIR NOS FILIÈRES</a>
         </div>
     </section>
 
-</body>
-</html>
+    <section id="formations" class="py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="section-title">Nos Filières d'Excellence</h2>
+            <div class="row g-4">
+                <div class="col-md-4 text-center">
+                    <div class="card card-formation p-4 h-100">
+                        <div class="icon-box"><i class="bi bi-code-slash"></i></div>
+                        <h4 class="fw-bold">Génie Logiciel</h4>
+                        <p class="text-muted">Développement web, mobile et architecture des systèmes d'information.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="card card-formation p-4 h-100">
+                        <div class="icon-box"><i class="bi bi-shield-lock"></i></div>
