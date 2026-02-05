@@ -28,15 +28,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>ETU-001</td>
-                    <td>Sarr Moussa</td>
-                    <td>Informatique</td>
-                    <td>14.5/20</td>
-                    <td><button class="btn btn-sm btn-info text-white">Bulletin</button></td>
-                </tr>
-            </tbody>
-        </table>
+    {% for etu in etudiants %}
+    <tr>
+        <td>{{ etu.matricule }}</td>
+        <td>{{ etu.nom }} {{ etu.prenom }}</td>
+        <td>{{ etu.filiere }}</td>
+        <td>
+            <span class="badge bg-info">En attente</span>
+        </td>
+        <td>
+            <a href="/bulletin/{{ etu.id }}" class="btn btn-sm btn-primary">Voir Bulletin</a>
+        </td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="5" class="text-center text-muted">Aucun étudiant enregistré pour le moment.</td>
+    </tr>
+    {% endfor %}
+</tbody>        </table>
     </div>
 </body>
 </html>
