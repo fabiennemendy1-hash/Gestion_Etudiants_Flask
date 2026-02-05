@@ -1,104 +1,51 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESTM CONNECT | Excellence Technologique</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        
-        /* Section Hero */
-        .hero {
-            background: linear-gradient(rgba(0, 74, 153, 0.8), rgba(15, 23, 42, 0.9)), 
-                        url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070');
-            background-size: cover;
-            background-position: center;
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            color: white;
-        }
+{% extends "layout.html" %}
 
-        .btn-portal {
-            background: #ffffff;
-            color: #004a99;
-            padding: 12px 35px;
-            font-weight: 700;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+{% block title %}Accueil | ESTM CONNECT{% endblock %}
 
-        .btn-portal:hover { background: #e2e8f0; color: #003366; }
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold" style="color: #004a99;">ESTM CONNECT</h1>
+        <p class="lead text-muted">L'excellence digitale au service de votre réussite académique.</p>
+        <div class="mt-4">
+            <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-5 shadow-sm" style="background: #004a99; border: none;">ACCÉDER AU PORTAIL</a>
+        </div>
+    </div>
 
-        /* Section Formations */
-        .section-title {
-            color: #004a99;
-            font-weight: 800;
-            margin-bottom: 50px;
-            text-align: center;
-            text-transform: uppercase;
-        }
+    <div class="row mt-5">
+        <div class="col-12 text-center mb-4">
+            <h2 class="fw-bold border-bottom d-inline-block pb-2">Nos Filières d'Excellence</h2>
+        </div>
 
-        .card-formation {
-            border: none;
-            border-bottom: 4px solid #004a99;
-            transition: 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .card-formation:hover { transform: translateY(-10px); }
-
-        .icon-box {
-            font-size: 2.5rem;
-            color: #004a99;
-            margin-bottom: 20px;
-        }
-
-        /* Footer / Contact */
-        .footer {
-            background: #0f172a;
-            color: white;
-            padding: 60px 0;
-        }
-    </style>
-</head>
-<body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="#">ESTM<span class="text-info">.</span></a>
-            <div class="ms-auto">
-                <a href="/login" class="btn btn-outline-light px-4 fw-bold">PORTAIL PRIVÉ</a>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4" style="border-top: 5px solid #0d6efd;">
+                <div class="display-4 mb-3 text-primary">🌐</div>
+                <h4 class="fw-bold">Réseaux & Télécoms</h4>
+                <p class="text-muted small">Architecture réseaux, sécurité informatique et télécommunications modernes.</p>
             </div>
         </div>
-    </nav>
 
-    <section class="hero">
-        <div class="container text-center">
-            <h1 class="display-2 fw-extrabold mb-4">L'école du <span class="text-info">Futur</span></h1>
-            <p class="lead mb-5 fs-4">Formez-vous aux métiers du numérique et du management avec l'ESTM.</p>
-            <a href="#formations" class="btn btn-portal">DÉCOUVRIR NOS FILIÈRES</a>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4" style="border-top: 5px solid #198754;">
+                <div class="display-4 mb-3 text-success">💻</div>
+                <h4 class="fw-bold">Génie Logiciel</h4>
+                <p class="text-muted small">Développement d'applications, programmation avancée et ingénierie logicielle.</p>
+            </div>
         </div>
-    </section>
 
-    <section id="formations" class="py-5 bg-light">
-        <div class="container py-5">
-            <h2 class="section-title">Nos Filières d'Excellence</h2>
-            <div class="row g-4">
-                <div class="col-md-4 text-center">
-                    <div class="card card-formation p-4 h-100">
-                        <div class="icon-box"><i class="bi bi-code-slash"></i></div>
-                        <h4 class="fw-bold">Génie Logiciel</h4>
-                        <p class="text-muted">Développement web, mobile et architecture des systèmes d'information.</p>
-			 <h4 class="fw-bold">Reseau Telecoms</h4>
-			<p class="text-muted">Développement web, mobile et architecture des systèmes d'information.</p>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4" style="border-top: 5px solid #dc3545;">
+                <div class="display-4 mb-3 text-danger">🎨</div>
+                <h4 class="fw-bold">Multimédia</h4>
+                <p class="text-muted small">Design graphique, production audiovisuelle et communication digitale.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="card card-formation p-4 h-100">
-                        <div class="icon-box"><i class="bi bi-shield-lock"></i></div>
+<style>
+    .card { transition: transform 0.3s ease; }
+    .card:hover { transform: translateY(-10px); }
+</style>
+{% endblock %}
+        
