@@ -38,10 +38,15 @@ etudiants = [
 
 @app.route('/')
 def index():
-    return redirect(url_for('login'))@app.route('/login', methods=['GET', 'POST'])
+    # Il doit y avoir un retour à la ligne après cette commande
+    return redirect(url_for('login'))
+
+# Cette ligne doit être seule sur sa ligne !
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
-    if request.method == 'POST':
+    # ... reste du code
+
         # Identifiants sécurisés pour l'administration ESTM
         if request.form['username'] == 'admin' and request.form['password'] == 'estm2026':
             return redirect(url_for('dashboard'))
