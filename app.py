@@ -35,11 +35,15 @@ etudiants = [
     {'matricule': 'ESTM-2026-003', 'prenom': 'Fatou', 'nom': 'SOW', 'note': 09.5}
 ]
 
-# 2. ROUTE D'ACCUEIL (Redirige vers la connexion)
 @app.route('/')
 def index():
-    return redirect(url_for('login'))
+    # Maintenant, la première page est l'accueil prestigieux
+    return render_template('accueil.html')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # Ton code de login actuel reste ici...
+    return render_template('login.html')
 # 3. PAGE DE CONNEXION (Vérifie admin / estm2026)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
