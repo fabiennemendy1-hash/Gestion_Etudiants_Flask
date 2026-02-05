@@ -38,8 +38,7 @@ etudiants = [
 
 @app.route('/')
 def index():
-    return redirect(url_for('dashboard'))
-@app.route('/login', methods=['GET', 'POST'])
+    return redirect(url_for('login'))@app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
