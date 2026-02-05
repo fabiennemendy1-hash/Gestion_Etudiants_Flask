@@ -1,35 +1,56 @@
 {% extends "layout.html" %}
+
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold text-dark">REGISTRE DES ÉTUDIANTS</h2>
-    <a href="/ajouter" class="btn btn-success fw-bold">+ NOUVEL ÉLÈVE</a>
+<div class="d-flex justify-content-between align-items-end mb-4">
+    <div>
+        <h2 class="fw-bold text-dark mb-0">RÉPERTOIRE ACADÉMIQUE</h2>
+        <p class="text-muted mb-0">ESTM CONNECT — Gestion des 60 Crédits</p>
+    </div>
+    <a href="/ajouter" class="btn btn-primary px-4 fw-bold" style="background:#004a99; border:none;">
+        + NOUVEL ÉTUDIANT
+    </a>
 </div>
-<div class="card card-pro p-0 overflow-hidden">
-    <table class="table table-hover mb-0">
-        <thead class="table-dark">
-            <tr>
-                <th class="ps-4">MATRICULE</th>
-                <th>NOM ET PRÉNOM</th>
-                <th class="text-center">MOYENNE</th>
-                <th class="text-end pe-4">ACTIONS</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for e in etudiants %}
-            <tr class="align-middle">
-                <td class="ps-4 fw-bold text-primary">{{ e.matricule }}</td>
-                <td class="text-uppercase">{{ e.prenom }} {{ e.nom }}</td>
-                <td class="text-center">
-                    <span class="badge {{ 'bg-success' if e.note >= 10 else 'bg-danger' }} rounded-pill px-3">
-                        {{ e.note }} / 20
-                    </span>
-                </td>
-                <td class="text-end pe-4">
-                    <a href="/bulletin/{{ loop.index0 }}" class="btn btn-sm btn-outline-dark">Consulter Bulletin</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+<div class="card border-0 shadow-sm" style="border-radius: 8px;">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead style="background: #f8fafc;">
+                <tr>
+                    <th class="py-3 ps-4 text-muted small">MATRICULE</th>
+                    <th class="py-3 text-muted small">NOM COMPLET</th>
+                    <th class="py-3 text-center text-muted small">MOYENNE</th>
+                    <th class="py-3 text-center text-muted small">STATUT</th>
+                    <th class="py-3 text-end pe-4 text-muted small">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in etudiants %}
+                <tr>
+                    <td class="ps-4 fw-bold text-primary">{{ e.matricule }}</td>
+                    <td class="text-uppercase fw-semibold">{{ e.prenom }} {{ e.nom }}</td>
+                    <td class="text-center fw-bold">{{ e.note }} / 20</td>
+                    <td class="text-center">
+                        {% if e.note >= 10 %}
+                        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">ADMIS</span>
+                        {% else %}
+                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">ÉCHEC</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-end pe-4">
+                        <a href="/bulletin/{{ loop.index0 }}" class="btn btn-sm btn-white border shadow-sm px-3">
+                            📄 Voir Bulletin
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        Aucun étudiant enregistré pour le moment.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
