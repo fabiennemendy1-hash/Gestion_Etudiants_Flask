@@ -1,48 +1,57 @@
 {% extends "layout.html" %}
 
-{% block title %}Accueil | ESTM{% endblock %}
-
 {% block content %}
-<div class="container py-5">
+<div class="hero-section text-white d-flex align-items-center" style="
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+    url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); 
+    background-size: cover; 
+    background-position: center; 
+    height: 60vh; 
+    border-radius: 0 0 20px 20px;">
+    
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold mb-3">L'Excellence à l'ESTM</h1>
+        <p class="lead mb-4">Construisez votre avenir avec nos formations de pointe en technologie et management.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-5 shadow">Espace Étudiant</a>
+            <a href="#filieres" class="btn btn-outline-light btn-lg px-5">Nos Filières</a>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5" id="filieres">
     <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold" style="color: #004a99;">Nos Filières d'Excellence</h1>
-        <p class="text-muted">Découvrez nos programmes de formation leader au Sénégal.</p>
+        <h2 class="fw-bold">Nos Filières d'Excellence</h2>
+        <div class="mx-auto bg-primary" style="height: 3px; width: 60px;"></div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-md-5 mb-4">
-            <div class="card h-100 border-0 shadow-sm text-center p-4">
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-5">
+            <div class="card h-100 shadow-sm border-0 text-center p-4">
                 <div class="display-4 mb-3">💻</div>
-                <h3 class="fw-bold">Génie Logiciel</h3>
-                <p class="text-muted">Conception, développement et gestion de solutions logicielles innovantes.</p>
-                <a href="{{ url_for('login') }}" class="btn btn-outline-primary mt-auto">En savoir plus</a>
+                <h3 class="fw-bold text-primary">Génie Logiciel</h3>
+                <p class="text-muted">Développement d'applications, IA et ingénierie logicielle avancée.</p>
             </div>
         </div>
 
-        <div class="col-md-5 mb-4">
-            <div class="card h-100 border-0 shadow-sm text-center p-4">
+        <div class="col-md-5">
+            <div class="card h-100 shadow-sm border-0 text-center p-4">
                 <div class="display-4 mb-3">🌐</div>
-                <h3 class="fw-bold">Réseaux & Télécoms</h3>
-                <p class="text-muted">Administration systèmes, sécurité réseaux et infrastructures de communication.</p>
-                <a href="{{ url_for('login') }}" class="btn btn-outline-primary mt-auto">En savoir plus</a>
+                <h3 class="fw-bold text-success">Réseaux & Télécoms</h3>
+                <p class="text-muted">Cyberécurité, infrastructures cloud et télécommunications modernes.</p>
             </div>
         </div>
-    </div>
-
-    <div class="text-center mt-5">
-        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-5" style="background: #004a99;">Accéder au Dashboard</a>
     </div>
 </div>
 
 <style>
+    /* Effet de survol sur les cartes */
     .card {
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease;
         border-radius: 15px;
-        background: #f8f9fa;
     }
     .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        transform: translateY(-10px);
     }
 </style>
-{% endblock %}        
+{% endblock %}
