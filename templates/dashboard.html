@@ -1,56 +1,53 @@
 {% extends "layout.html" %}
 
-{% block content %}
-<div class="d-flex justify-content-between align-items-end mb-4">
-    <div>
-        <h2 class="fw-bold text-dark mb-0">RÉPERTOIRE ACADÉMIQUE</h2>
-        <p class="text-muted mb-0">ESTM CONNECT — Gestion des 60 Crédits</p>
-    </div>
-    <a href="/ajouter" class="btn btn-primary px-4 fw-bold" style="background:#004a99; border:none;">
-        + NOUVEL ÉTUDIANT
-    </a>
-</div>
+{% block title %}Dashboard | ESTM CONNECT{% endblock %}
 
-<div class="card border-0 shadow-sm" style="border-radius: 8px;">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-            <thead style="background: #f8fafc;">
-                <tr>
-                    <th class="py-3 ps-4 text-muted small">MATRICULE</th>
-                    <th class="py-3 text-muted small">NOM COMPLET</th>
-                    <th class="py-3 text-center text-muted small">MOYENNE</th>
-                    <th class="py-3 text-center text-muted small">STATUT</th>
-                    <th class="py-3 text-end pe-4 text-muted small">ACTIONS</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for e in etudiants %}
-                <tr>
-                    <td class="ps-4 fw-bold text-primary">{{ e.matricule }}</td>
-                    <td class="text-uppercase fw-semibold">{{ e.prenom }} {{ e.nom }}</td>
-                    <td class="text-center fw-bold">{{ e.note }} / 20</td>
-                    <td class="text-center">
-                        {% if e.note >= 10 %}
-                        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">ADMIS</span>
-                        {% else %}
-                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">ÉCHEC</span>
-                        {% endif %}
-                    </td>
-                    <td class="text-end pe-4">
-                        <a href="/bulletin/{{ loop.index0 }}" class="btn btn-sm btn-white border shadow-sm px-3">
-                            📄 Voir Bulletin
-                        </a>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5" class="text-center py-5 text-muted">
-                        Aucun étudiant enregistré pour le moment.
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-8">
+            <h1 class="fw-bold text-dark mb-1" style="letter-spacing: -1px;">Tableau de Bord Académique</h1>
+            <p class="text-muted">Gestion des 60 crédits et des performances par département.</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a href="/ajouter" class="btn btn-primary px-4 py-2 fw-bold shadow-sm" style="background: #004a99; border: none;">
+                + INSCRIRE UN ÉTUDIANT
+            </a>
+        </div>
     </div>
-</div>
-{% endblock %}
+
+    <div class="card border-0 shadow-sm" style="border-radius: 15px; overflow: hidden;">
+        <div class="card-header bg-white py-3 border-bottom-0">
+            <h5 class="mb-0 fw-bold" style="color: #334155;">Registre Global 2025-2026</h5>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead style="background: #f8fafc;">
+                    <tr>
+                        <th class="ps-4 py-3 text-muted small fw-bold">MATRICULE</th>
+                        <th class="py-3 text-muted small fw-bold">ÉTUDIANT</th>
+                        <th class="py-3 text-muted small fw-bold">DÉPARTEMENT / FILIÈRE</th>
+                        <th class="py-3 text-center text-muted small fw-bold">MOYENNE</th>
+                        <th class="py-3 text-center text-muted small fw-bold">DÉCISION</th>
+                        <th class="py-3 text-end pe-4 text-muted small fw-bold">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in etudiants %}
+                    <tr>
+                        <td class="ps-4">
+                            <span class="badge bg-light text-dark border fw-medium px-2 py-1">{{ e.matricule }}</span>
+                        </td>
+                        <td>
+                            <div class="fw-bold text-dark">{{ e.prenom }} {{ e.nom }}</div>
+                        </td>
+                        <td>
+                            {% if "Multimédia" in e.filiere %}
+                                <span class="badge bg-info-subtle text-info border border-info-subtle px-3 py-2">🎨 {{ e.filiere }}</span>
+                            {% elif "Réseaux" in e.filiere %}
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">🌐 {{ e.filiere }}</span>
+                            {% elif "Droit" in e.filiere %}
+                                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-3 py-2">⚖️ {{ e.filiere }}</span>
+                            {% else %}
+                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">💰 {{ e.fili
