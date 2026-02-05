@@ -38,3 +38,6 @@ def ajouter_note():
 
 if __name__ == '__main__':
     app.run(debug=True)
+@app.route('/saisie')
+def saisie():
+    return render_template('saisie_notes.html')
