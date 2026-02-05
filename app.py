@@ -38,9 +38,7 @@ etudiants = [
 
 @app.route('/')
 def index():
-    # Redirige automatiquement vers la page de connexion au lancement
-    return redirect(url_for('login'))
-
+    return redirect(url_for('dashboard'))
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
