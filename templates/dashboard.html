@@ -1,57 +1,56 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Tableau de Bord - Gestion Scolaire</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body class="bg-light">
-    <nav class="navbar navbar-dark bg-dark mb-4">
-        <div class="container">
-            <span class="navbar-brand">Système de Gestion des 60 Crédits</span>
-            <a href="/" class="btn btn-outline-danger btn-sm">Déconnexion</a>
-        </div>
-    </nav>
+{% extends "layout.html" %}
 
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Liste des Étudiants</h2>
-            <div>
-                <a href="/ajouter_etudiant" class="btn btn-success">+ Inscrire un Étudiant</a>
-                <a href="/saisie" class="btn btn-primary">+ Saisir une Note</a>
-            </div>
-        </div>
-
-        <div class="card shadow">
-            <div class="card-body">
-                <table class="table table-hover">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Matricule</th>
-                            <th>Nom & Prénom</th>
-                            <th>Filière</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for etu in etudiants %}
-                        <tr>
-                            <td>{{ etu.matricule }}</td>
-                            <td>{{ etu.prenom }} {{ etu.nom }}</td>
-                            <td>{{ etu.filiere }}</td>
-                            <td class="text-center">
-                                <a href="/bulletin/{{ etu.id }}" class="btn btn-info btn-sm text-white">Consulter Bulletin</a>
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td colspan="4" class="text-center text-muted">Aucun étudiant inscrit pour le moment.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+{% block content %}
+<div class="d-flex justify-content-between align-items-end mb-4">
+    <div>
+        <h2 class="fw-bold text-dark mb-0">RÉPERTOIRE ACADÉMIQUE</h2>
+        <p class="text-muted mb-0">ESTM CONNECT — Gestion des 60 Crédits</p>
     </div>
-</body>
-</html>
+    <a href="/ajouter" class="btn btn-primary px-4 fw-bold" style="background:#004a99; border:none;">
+        + NOUVEL ÉTUDIANT
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm" style="border-radius: 8px;">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead style="background: #f8fafc;">
+                <tr>
+                    <th class="py-3 ps-4 text-muted small">MATRICULE</th>
+                    <th class="py-3 text-muted small">NOM COMPLET</th>
+                    <th class="py-3 text-center text-muted small">MOYENNE</th>
+                    <th class="py-3 text-center text-muted small">STATUT</th>
+                    <th class="py-3 text-end pe-4 text-muted small">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in etudiants %}
+                <tr>
+                    <td class="ps-4 fw-bold text-primary">{{ e.matricule }}</td>
+                    <td class="text-uppercase fw-semibold">{{ e.prenom }} {{ e.nom }}</td>
+                    <td class="text-center fw-bold">{{ e.note }} / 20</td>
+                    <td class="text-center">
+                        {% if e.note >= 10 %}
+                        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">ADMIS</span>
+                        {% else %}
+                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">ÉCHEC</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-end pe-4">
+                        <a href="/bulletin/{{ loop.index0 }}" class="btn btn-sm btn-white border shadow-sm px-3">
+                            📄 Voir Bulletin
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        Aucun étudiant enregistré pour le moment.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
