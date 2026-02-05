@@ -2,62 +2,91 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# --- DONNÉES DE TEST ---
+# Base de données fictive structurée par filières professionnelles
 etudiants = [
-    {'matricule': 'ESTM-2026-001', 'prenom': 'Awa', 'nom': 'NDIAYE', 'note': 16.5},
-    {'matricule': 'ESTM-2026-002', 'prenom': 'Moussa', 'nom': 'DIALLO', 'note': 14.0},
-    {'matricule': 'ESTM-2026-003', 'prenom': 'Fatou', 'nom': 'SOW', 'note': 09.5}
+    {
+        'matricule': 'RT-2026-001', 
+        'prenom': 'Abdou', 
+        'nom': 'SARR', 
+        'note': 14.5, 
+        'filiere': 'Réseaux & Télécoms'
+    },
+    {
+        'matricule': 'CPTA-2026-012', 
+        'prenom': 'Fatou', 
+        'nom': 'BA', 
+        'note': 12.0, 
+        'filiere': 'Comptabilité'
+    },
+    {
+        'matricule': 'CIM-2026-045', 
+        'prenom': 'Moussa', 
+        'nom': 'DIALLO', 
+        'note': 15.75, 
+        'filiere': 'Communication & Multimédia'
+    },
+    {
+        'matricule': 'DRT-2026-009', 
+        'prenom': 'Awa', 
+        'nom': 'GUEYE', 
+        'note': 9.5, 
+        'filiere': 'Droit des Affaires'
+    }
 ]
 
-# --- 1. PAGE D'ACCUEIL (PORTAIL PUBLIC) ---
+# --- ROUTES DE NAVIGATION ---
+
 @app.route('/')
 def index():
-    # Cette fonction s'appelle 'index' pour ne pas créer de conflit avec 'login'
-    return render_template('accueil.html')
+    # Redirige automatiquement vers la page de connexion au lancement
+    return redirect(url_for('login'))
 
-# --- 2. PAGE DE CONNEXION ---
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        
-        if username == 'admin' and password == 'estm2026':
+        # Identifiants sécurisés pour l'administration ESTM
+        if request.form['username'] == 'admin' and request.form['password'] == 'estm2026':
             return redirect(url_for('dashboard'))
         else:
             error = "Identifiants invalides. Veuillez réessayer."
-            
     return render_template('login.html', error=error)
 
-# --- 3. TABLEAU DE BORD (ESPACE PRIVÉ) ---
 @app.route('/dashboard')
 def dashboard():
+    # Affiche la liste de tous les étudiants enregistrés
     return render_template('dashboard.html', etudiants=etudiants)
 
-# --- 4. AJOUTER UN ÉTUDIANT ---
 @app.route('/ajouter', methods=['GET', 'POST'])
 def ajouter():
     if request.method == 'POST':
-        nouveau = {
-            'matricule': request.form.get('matricule'),
-            'prenom': request.form.get('prenom'),
-            'nom': request.form.get('nom'),
-            'note': float(request.form.get('note'))
+        # Récupération des données du formulaire
+        nouvel_etudiant = {
+            'matricule': request.form['matricule'].upper(),
+            'prenom': request.form['prenom'].capitalize(),
+            'nom': request.form['nom'].upper(),
+            'filiere': request.form['filiere'],
+            'note': float(request.form['note'])
         }
-        etudiants.append(nouveau)
+        # Ajout à notre liste (Base de données temporaire)
+        etudiants.append(nouvel_etudiant)
         return redirect(url_for('dashboard'))
+    
     return render_template('ajouter.html')
 
-# --- 5. BULLETIN DE NOTES ---
 @app.route('/bulletin/<int:id>')
 def bulletin(id):
+    # Récupère l'étudiant par son index dans la liste
     try:
         eleve = etudiants[id]
-        status = "ADMIS" if eleve['note'] >= 10 else "ÉCHEC"
+        # Détermination du statut pour le tampon officiel
+        status = "ADMIS" if eleve['note'] >= 10 else "AJOURNÉ"
         return render_template('bulletin.html', eleve=eleve, status=status)
     except IndexError:
-        return "Étudiant introuvable", 404
+        return "Étudiant non trouvé", 404
+
+# --- LANCEMENT DE L'APPLICATION ---
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Le mode debug=True permet de voir les modifications en temps réel
+    app.run(debug=True, port=5000)
