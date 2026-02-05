@@ -11,8 +11,8 @@ etudiants = [
 
 @app.route('/')
 def index():
-    # On affiche la page d'accueil directement
-    return render_template('acceuil.html')
+    # Vérifie si tu as écrit 'accueil' ou 'acceuil' ici
+    return render_template('accueil.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
