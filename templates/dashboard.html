@@ -1,29 +1,33 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold">Liste des Étudiants</h2>
-    <a href="{{ url_for('ajouter') }}" class="btn btn-success">+ Ajouter un élève</a>
+    <h2 class="fw-bold text-dark">REGISTRE DES ÉTUDIANTS</h2>
+    <a href="/ajouter" class="btn btn-success fw-bold">+ NOUVEL ÉLÈVE</a>
 </div>
-<div class="card p-3 shadow-sm border-0">
-    <table class="table table-hover text-center align-middle">
+<div class="card card-pro p-0 overflow-hidden">
+    <table class="table table-hover mb-0">
         <thead class="table-dark">
             <tr>
-                <th>Matricule</th>
-                <th>Prénom & Nom</th>
-                <th>Moyenne</th>
-                <th>Action</th>
+                <th class="ps-4">MATRICULE</th>
+                <th>NOM ET PRÉNOM</th>
+                <th class="text-center">MOYENNE</th>
+                <th class="text-end pe-4">ACTIONS</th>
             </tr>
         </thead>
         <tbody>
             {% for e in etudiants %}
-            <tr>
-                <td class="fw-bold">{{ e.matricule }}</td>
-                <td>{{ e.prenom }} {{ e.nom }}</td>
-                <td><span class="badge {{ 'bg-success' if e.note >= 10 else 'bg-danger' }} p-2">{{ e.note }}/20</span></td>
-                <td><a href="/bulletin/{{ loop.index0 }}" class="btn btn-sm btn-outline-primary">Détails / Bulletin</a></td>
+            <tr class="align-middle">
+                <td class="ps-4 fw-bold text-primary">{{ e.matricule }}</td>
+                <td class="text-uppercase">{{ e.prenom }} {{ e.nom }}</td>
+                <td class="text-center">
+                    <span class="badge {{ 'bg-success' if e.note >= 10 else 'bg-danger' }} rounded-pill px-3">
+                        {{ e.note }} / 20
+                    </span>
+                </td>
+                <td class="text-end pe-4">
+                    <a href="/bulletin/{{ loop.index0 }}" class="btn btn-sm btn-outline-dark">Consulter Bulletin</a>
+                </td>
             </tr>
-            {% else %}
-            <tr><td colspan="4" class="py-4 text-muted">Aucune donnée enregistrée.</td></tr>
             {% endfor %}
         </tbody>
     </table>
