@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}Inscription | ESTM CONNECT{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-lg" style="border-radius: 12px;">
+            <div class="card-header bg-white py-4 border-0">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="width: 45px; height: 45px; background: #e0ecff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                        <span style="font-size: 20px;">🎓</span>
+                    </div>
+                    <h3 class="fw-bold mb-0" style="color: #004a99; letter-spacing: -0.5px;">NOUVELLE INSCRIPTION</h3>
+                </div>
+            </div>
+
+            <div class="card-body px-5 pb-5">
+                <p class="text-center text-muted mb-5">Veuillez renseigner les informations académiques de l'étudiant ci-dessous.</p>
+                
+                <form action="/ajouter" method="POST">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small text-secondary">PRÉNOM DE L'ÉTUDIANT</label>
+                            <input type="text" name="prenom" class="form-control form-control-lg" placeholder="Sokhna" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small text-secondary">NOM DE FAMILLE</label>
+                            <input type="text" name="nom" class="form-control form-control-lg" placeholder="DIOP" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small text-secondary">NUMÉRO MATRICULE</label>
+                            <input type="text" name="matricule" class="form-control form-control-lg" placeholder="ESTM-2026-00X" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small text-secondary">NOTE GLOBALE / 20</label>
+                            <input type="number" step="0.01" name="note" class="form-control form-control-lg" placeholder="00.00" min="0" max="20" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold small text-secondary">FILIÈRE PROFESSIONNELLE</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">📍</span>
+                                <select name="filiere" class="form-select form-select-lg border-start-0" required>
+                                    <option value="" selected disabled>Sélectionner le département...</option>
+                                    <option value="Réseaux & Télécoms">Réseaux & Télécommunications</option>
+                                    <option value="Comptabilité">Comptabilité & Gestion</option>
+                                    <option value="Communication & Multimédia">CIM (Communication & Multimédia)</option>
+                                    <option value="Droit des Affaires">Droit des Affaires</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-5">
+                            <div class="d-grid gap-3">
+                                <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm" style="background: #004a99; border: none; padding: 15px;">
+                                    VALIDER ET ENREGISTRER
+                                </button>
+                                <a href="/dashboard" class="btn btn-link text-decoration-none text-muted fw-semibold">
+                                    Retourner au tableau de bord sans enregistrer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <small class="text-muted">Système sécurisé ESTM CONNECT - Droits d'administration requis</small>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Style pour améliorer les champs de saisie */
+    .form-control, .form-select {
+        border: 1.5px solid #edf2f7;
+        font-size: 0.95rem;
+        border-radius: 8px;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: #004a99;
+        box-shadow: 0 0 0 4px rgba(0, 74, 153, 0.08);
+        background-color: #fff;
+    }
+    .form-label {
+        letter-spacing: 0.5px;
+    }
+</style>
+{% endblock %}
