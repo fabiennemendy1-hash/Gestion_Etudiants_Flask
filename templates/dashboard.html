@@ -1,57 +1,31 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Tableau de Bord - Gestion Scolaire</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body class="bg-light">
-    <nav class="navbar navbar-dark bg-dark mb-4">
-        <div class="container">
-            <span class="navbar-brand">Système de Gestion des 60 Crédits</span>
-            <a href="/" class="btn btn-outline-danger btn-sm">Déconnexion</a>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Liste des Étudiants</h2>
-            <div>
-                <a href="/ajouter_etudiant" class="btn btn-success">+ Inscrire un Étudiant</a>
-                <a href="/saisie" class="btn btn-primary">+ Saisir une Note</a>
-            </div>
-        </div>
-
-        <div class="card shadow">
-            <div class="card-body">
-                <table class="table table-hover">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Matricule</th>
-                            <th>Nom & Prénom</th>
-                            <th>Filière</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for etu in etudiants %}
-                        <tr>
-                            <td>{{ etu.matricule }}</td>
-                            <td>{{ etu.prenom }} {{ etu.nom }}</td>
-                            <td>{{ etu.filiere }}</td>
-                            <td class="text-center">
-                                <a href="/bulletin/{{ etu.id }}" class="btn btn-info btn-sm text-white">Consulter Bulletin</a>
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td colspan="4" class="text-center text-muted">Aucun étudiant inscrit pour le moment.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Liste des Étudiants</h2>
+    <a href="{{ url_for('ajouter') }}" class="btn btn-success">+ Ajouter un élève</a>
+</div>
+<div class="card p-3 shadow-sm border-0">
+    <table class="table table-hover text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Matricule</th>
+                <th>Prénom & Nom</th>
+                <th>Moyenne</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in etudiants %}
+            <tr>
+                <td class="fw-bold">{{ e.matricule }}</td>
+                <td>{{ e.prenom }} {{ e.nom }}</td>
+                <td><span class="badge {{ 'bg-success' if e.note >= 10 else 'bg-danger' }} p-2">{{ e.note }}/20</span></td>
+                <td><a href="/bulletin/{{ loop.index0 }}" class="btn btn-sm btn-outline-primary">Détails / Bulletin</a></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4" class="py-4 text-muted">Aucune donnée enregistrée.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
