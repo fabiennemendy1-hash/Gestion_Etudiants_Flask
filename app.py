@@ -44,16 +44,13 @@ def index():
 # Cette ligne doit être seule sur sa ligne !
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
-    # ... reste du code
-
-        # Identifiants sécurisés pour l'administration ESTM
-        if request.form['username'] == 'admin' and request.form['password'] == 'estm2026':
-            return redirect(url_for('dashboard'))
-        else:
-            error = "Identifiants invalides. Veuillez réessayer."
-    return render_template('login.html', error=error)
-
+....error = None
+....if request.method == 'POST':
+........if request.form['username'] == 'admin' and request.form['password'] == 'estm2026':
+............return redirect(url_for('dashboard'))
+........else:
+............error = "Identifiants invalides."
+....return render_template('login.html', error=error)
 @app.route('/dashboard')
 def dashboard():
     # Affiche la liste de tous les étudiants enregistrés
