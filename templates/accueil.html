@@ -1,51 +1,48 @@
 {% extends "layout.html" %}
 
-{% block title %}Accueil | ESTM CONNECT{% endblock %}
+{% block title %}Accueil | ESTM{% endblock %}
 
 {% block content %}
 <div class="container py-5">
     <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold" style="color: #004a99;">ESTM CONNECT</h1>
-        <p class="lead text-muted">L'excellence digitale au service de votre réussite académique.</p>
-        <div class="mt-4">
-            <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-5 shadow-sm" style="background: #004a99; border: none;">ACCÉDER AU PORTAIL</a>
+        <h1 class="display-4 fw-bold" style="color: #004a99;">Nos Filières d'Excellence</h1>
+        <p class="text-muted">Découvrez nos programmes de formation leader au Sénégal.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-5 mb-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4">
+                <div class="display-4 mb-3">💻</div>
+                <h3 class="fw-bold">Génie Logiciel</h3>
+                <p class="text-muted">Conception, développement et gestion de solutions logicielles innovantes.</p>
+                <a href="{{ url_for('login') }}" class="btn btn-outline-primary mt-auto">En savoir plus</a>
+            </div>
+        </div>
+
+        <div class="col-md-5 mb-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4">
+                <div class="display-4 mb-3">🌐</div>
+                <h3 class="fw-bold">Réseaux & Télécoms</h3>
+                <p class="text-muted">Administration systèmes, sécurité réseaux et infrastructures de communication.</p>
+                <a href="{{ url_for('login') }}" class="btn btn-outline-primary mt-auto">En savoir plus</a>
+            </div>
         </div>
     </div>
 
-    <div class="row mt-5">
-        <div class="col-12 text-center mb-4">
-            <h2 class="fw-bold border-bottom d-inline-block pb-2">Nos Filières d'Excellence</h2>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm text-center p-4" style="border-top: 5px solid #0d6efd;">
-                <div class="display-4 mb-3 text-primary">🌐</div>
-                <h4 class="fw-bold">Réseaux & Télécoms</h4>
-                <p class="text-muted small">Architecture réseaux, sécurité informatique et télécommunications modernes.</p>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm text-center p-4" style="border-top: 5px solid #198754;">
-                <div class="display-4 mb-3 text-success">💻</div>
-                <h4 class="fw-bold">Génie Logiciel</h4>
-                <p class="text-muted small">Développement d'applications, programmation avancée et ingénierie logicielle.</p>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm text-center p-4" style="border-top: 5px solid #dc3545;">
-                <div class="display-4 mb-3 text-danger">🎨</div>
-                <h4 class="fw-bold">Multimédia</h4>
-                <p class="text-muted small">Design graphique, production audiovisuelle et communication digitale.</p>
-            </div>
-        </div>
+    <div class="text-center mt-5">
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-5" style="background: #004a99;">Accéder au Dashboard</a>
     </div>
 </div>
 
 <style>
-    .card { transition: transform 0.3s ease; }
-    .card:hover { transform: translateY(-10px); }
+    .card {
+        transition: all 0.3s ease;
+        border-radius: 15px;
+        background: #f8f9fa;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
 </style>
-{% endblock %}
-        
+{% endblock %}        
